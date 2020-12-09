@@ -1,0 +1,47 @@
+BootStrap: library
+From: ubuntu:sha256.cb37e547a14249943c5a3ee5786502f8db41384deb83fa6d2b62f3c587b82b17
+
+%files
+  arboreto.yml /opt/arboreto.yml
+
+%post
+  apt-get update
+  apt install -y wget
+
+  cd /opt
+  wget -O miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-py38_4.9.2-Linux-x86_64.sh
+  echo "1314b90489f154602fd794accfc90446111514a5a72fe1f71ab83e07de9504a7  miniconda.sh" | sha256sum -c
+  bash miniconda.sh -b -p /opt/conda
+
+  /opt/conda/bin/conda env create --file /opt/arboreto.yml
+  # The above environment definition was derived using the following
+  # constraints:
+  #
+  #   /opt/conda/bin/conda create \
+  #     --yes \
+  #     --name arboreto \
+  #     --channel defaults \
+  #     --channel conda-forge \
+  #     --channel bioconda \
+  #     python==3.6.11 \
+  #     arboreto==0.1.5 \
+  #     "pandas<1.0"
+  #
+  # arboreto v0.1.5 is the most recent release (from 2018-06-11). Its
+  # documentation strongly recommends installing through conda, which is the
+  # only reason I an using it here.
+  #
+  # pandas is constrained because arboreto uses a pandas API (`.as_matrix()`)
+  # that was deprecated in pandas v0.23.0 and removed in v1.0. Unfortunately,
+  # arboreto seems to require pandas>=0.24.0 (i.e. the deprecation warnings
+  # were likely present but ignored when arboreto was published), so I decided
+  # to pick the most recent pandas before removal of the API, which means that
+  # the warnings will still be present when running arboreto. This pandas
+  # version apparently does not support Python 3.8, so the environment is
+  # further constrained to use an older Python.
+
+  wget "https://raw.githubusercontent.com/tmoerman/arboreto/0.1.5/scripts/run_arboretum.py"
+  echo "83f77b8782403e597edb5677d20a775ba012532e742d04eb7401e3571d438d18  run_arboretum.py" | sha256sum -c
+
+%runscript
+  /opt/conda/envs/arboreto/bin/python /opt/run_arboretum.py "$@"

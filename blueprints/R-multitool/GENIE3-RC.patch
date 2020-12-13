@@ -1,0 +1,11 @@
+--- GENIE3.R	2020-12-11 20:34:07.719691969 +0100
++++ GENIE3.R.patched	2020-12-11 20:34:55.529591444 +0100
+@@ -28,7 +28,7 @@
+ #' @export
+ GENIE3 <- function(expr.matrix, tree.method="RF", K="sqrt", ntrees=1000, regulators=NULL, ncores=1, verbose=FALSE, seed=NULL) {
+ 
+-	dyn.load("GENIE3.so")
++	dyn.load("/opt/GENIE3/GENIE3_R_C_wrapper/GENIE3.so")
+ 
+ 	# check input arguments
+ 	if (!is.matrix(expr.matrix) && !is.array(expr.matrix)) {

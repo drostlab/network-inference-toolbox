@@ -2,17 +2,24 @@ options(renv.settings.snapshot.type = "all")
 renv::consent(provided = TRUE)
 renv::init(bare = TRUE)
 
-install.packages("reshape2")
-install.packages("doRNG")
-install.packages("doParallel")
-install.packages("ppcor")
-install.packages("randomForest")
-install.packages("Rcpp")
-install.packages("foreach")
-install.packages("poweRlaw")
-install.packages("diptest")
-install.packages("igraph")
-install.packages("infotheo")
-install.packages("entropy")
+renv::install(c(
+  "bioc::GENIE3",
+  "cvTools",
+  "doParallel",
+  "doRNG",
+  "diptest",
+  "entropy",
+  "foreach",
+  "glmnet",
+  "igraph",
+  "infotheo",
+  "kSamples",
+  "LEAP",
+  "poweRlaw",
+  "ppcor",
+  "pracma",
+  "randomForest",
+  "Rcpp"
+))
 
 renv::snapshot()

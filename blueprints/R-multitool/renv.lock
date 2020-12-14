@@ -8,13 +8,43 @@
       }
     ]
   },
+  "Bioconductor": {
+    "Version": "3.10"
+  },
   "Packages": {
+    "BiocManager": {
+      "Package": "BiocManager",
+      "Version": "1.30.10",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "db75371846625725e221470b310da1d5"
+    },
+    "DEoptimR": {
+      "Package": "DEoptimR",
+      "Version": "1.0-8",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "4fdd17df6c1b897cb59bdd9cf6621a43"
+    },
+    "GENIE3": {
+      "Package": "GENIE3",
+      "Version": "1.8.0",
+      "Source": "Bioconductor",
+      "Hash": "d6c3dcbf4c11c9569b610300513ec448"
+    },
     "KernSmooth": {
       "Package": "KernSmooth",
       "Version": "2.23-16",
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "997471f25a7ed6c782f0090ce52cc63a"
+    },
+    "LEAP": {
+      "Package": "LEAP",
+      "Version": "0.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "5ba753e4c17879c03868cd38044e415a"
     },
     "MASS": {
       "Package": "MASS",
@@ -36,6 +66,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "125dc7a0ed375eb68c0ce533b48d291f"
+    },
+    "SuppDists": {
+      "Package": "SuppDists",
+      "Version": "1.1-9.5",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "7918b4f1d9c464c96964abada296aaf6"
     },
     "boot": {
       "Package": "boot",
@@ -64,6 +101,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "89cf4b8207269ccf82fbeb6473fd662b"
+    },
+    "cvTools": {
+      "Package": "cvTools",
+      "Version": "0.3.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "9a59aec87238b0d648ca035fec5565ca"
     },
     "digest": {
       "Package": "digest",
@@ -114,6 +158,13 @@
       "Repository": "CRAN",
       "Hash": "9a7efaa7320b9f327a904d1e615b0b46"
     },
+    "glmnet": {
+      "Package": "glmnet",
+      "Version": "4.0-2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "056100917c75e6f8a0d36f8bdd552799"
+    },
     "glue": {
       "Package": "glue",
       "Version": "1.4.2",
@@ -141,6 +192,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "64778782a89480e9a644f69aad9a2877"
+    },
+    "kSamples": {
+      "Package": "kSamples",
+      "Version": "1.2-9",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "6a1206db0c58154101383c389adb5ad1"
     },
     "lattice": {
       "Package": "lattice",
@@ -233,12 +291,26 @@
       "Repository": "CRAN",
       "Hash": "ee3ca1cacd13e35dbb71ac1999d98cbc"
     },
+    "robustbase": {
+      "Package": "robustbase",
+      "Version": "0.93-6",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "241454e22c9d26b11669b78d06706b41"
+    },
     "rpart": {
       "Package": "rpart",
       "Version": "4.1-15",
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "9787c1fcb680e655d062e7611cadf78e"
+    },
+    "shape": {
+      "Package": "shape",
+      "Version": "1.4.5",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "58510f25472de6fd363d76698d29709e"
     },
     "spatial": {
       "Package": "spatial",

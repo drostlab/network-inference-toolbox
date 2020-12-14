@@ -7,8 +7,6 @@ From: ubuntu:sha256.cb37e547a14249943c5a3ee5786502f8db41384deb83fa6d2b62f3c587b8
   renv.lock /opt/renv.lock
   bootstrap-environment.R /opt/bootstrap-environment.R
   BTR.source /opt/BTR.source
-  LEAP.source /opt/LEAP.source
-  GENIE3-RC.patch /opt/GENIE3-RC.patch
 
 %post
   echo "deb http://us.archive.ubuntu.com/ubuntu focal universe" >> /etc/apt/sources.list
@@ -17,11 +15,12 @@ From: ubuntu:sha256.cb37e547a14249943c5a3ee5786502f8db41384deb83fa6d2b62f3c587b8
 
   # We will construct the environment in `/opt`. Ultimately, it will contain
   # an `renv` environment containing all R dependencies and all tools that can
-  # be installed directly from CRAN (i.e., `ppcor`). Then we will manually
-  # install BTR, LEAP, GENIE3_R, GENIE3_R_C_wrapper and SINCERITIES-R.
+  # be installed directly from CRAN (or bioconductor if really necessary).
+  # Then we will manually install BTR, GENIE3-R, SCODE-R SINCERITIES-R.
   cd /opt
 
-  ./install-R-packages.sh <renv.source  # install `renv`
+  # Install renv, setup the environment and install packages into it:
+  ./install-R-packages.sh <renv.source
   if [ -f "/opt/renv.lock" ]; then
     # This is the default case and will construct the environment with all
     # package versions pinned, as declared in `renv.lock`.
@@ -47,23 +46,34 @@ From: ubuntu:sha256.cb37e547a14249943c5a3ee5786502f8db41384deb83fa6d2b62f3c587b8
   fi
   echo 'renv::activate("/opt")' >Rprofile
 
-  # Install BTR and LEAP:
-  cat BTR.source LEAP.source | ./install-R-packages.sh
+  # Install BTR (which has been removed from CRAN):
+  ./install-R-packages.sh <BTR.source
 
-  # Install GENIE3 (R and R/C variants):
+  # Install GENIE3 (R variant):
   git clone https://github.com/vahuynh/GENIE3
   cd GENIE3
   git checkout 2ad51d202467f699eca7a61d7690b6a8e3d12cc6
-  # ^ The GENIE3 repository has no tagged versions
-  cd GENIE3_R_C_wrapper
-  R CMD SHLIB GENIE3.c
-  # Unfortunately, (a) GENIE3.R contains a local reference to `GENIE3.so` and
-  # (b) R does not honor the standard `dlopen` lookup paths for `dyn.load`, so
-  # we cannot just set `LD_LIBRARY_PATH` to have the shared object be picked
-  # up. To ensure we can run GENIE3 from any working directory, we will patch
-  # the source to make the `.so` reference absolute.
-  patch < /opt/GENIE3-RC.patch
+  # ^ This repository has no tagged versions
+  #
+  # NOTE: The GENIE3_R_C_wrapper component has apparently been superseded by
+  #   `https://github.com/aertslab/GENIE3`, though we're not completely sure
+  #   which of them really is the canonical version since the changes have
+  #   been largely cosmetic. For now we will install that other GENIE3 as a
+  #   package (through `renv.lock`). In case we need the version from
+  #   `https://github.com/vahuynh/GENIE3` after all, I will leave the
+  #   following in here for now:
+  #
+  #    cd GENIE3_R_C_wrapper
+  #    R CMD SHLIB GENIE3.c
+  #    # Unfortunately, (a) GENIE3.R contains a local reference to `GENIE3.so`
+  #    # and (b) R does not honor the standard `dlopen` lookup paths for
+  #    # `dyn.load`, so we cannot just set `LD_LIBRARY_PATH` to have the
+  #    # shared object be picked up. To ensure we can run GENIE3 from any
+  #    # working directory, we will patch the source to make the `.so`
+  #    # reference absolute.
+  #    patch < /opt/GENIE3-RC.patch
   cd /opt
+  ln -s GENIE3/GENIE3_R GENIE3_R
 
   # Install SCODE-R:
   git clone https://github.com/hmatsu1226/SCODE
@@ -76,18 +86,21 @@ From: ubuntu:sha256.cb37e547a14249943c5a3ee5786502f8db41384deb83fa6d2b62f3c587b8
   #   directly in the pipeline glue.
   cd SCODE
   git checkout d481cd807b9b44e8148d540cdac15cbcae159478
+  # ^ This repository has no tagged versions
   cd /opt
 
   # Install SINCERITIES-R:
   wget -O /tmp/SINCERITIES-R.zip https://github.com/CABSEL/SINCERITIES/raw/bb264256c70e6a38a0550eb37159707105d0d0f3/SINCERITIES-R_v2.0.zip
   # ...yes, you read that right. This is a zipfile containing the source code,
   # committed verbatim into the repository. It also incidentally contains a
-  # bunch of crap like __MACOSX, .DS_Store files and so on, so we will only
-  # pluck R source code and CSV data from it.
+  # bunch of crap like `__MACOSX`, `.DS_Store` files and so on, so we will
+  # only pluck R source code and CSV data from it.
   echo "d93307e0dbbd8f87d30e263578efd2cecfaf6583aa6889b67b6cb0a0dbe1690f  /tmp/SINCERITIES-R.zip" | sha256sum -c
   unzip /tmp/SINCERITIES-R.zip "SINCERITIES-R v2.0/*.R" "SINCERITIES-R v2.0/*.csv"
   mv "SINCERITIES-R v2.0" SINCERITIES
-  
+  # SINCERITIES-R is currently untested because I find its documentation
+  # mostly unreadable and I didn't see any examples. If you want to use it, go
+  # ahead, but you may need to fix this build.
 
 %environment
   export LC_ALL=C

@@ -28,4 +28,4 @@ From: ubuntu:sha256.cb37e547a14249943c5a3ee5786502f8db41384deb83fa6d2b62f3c587b8
   export PATH="/opt/julia/bin:$PATH"
 
 %runscript
-  julia
+  julia "$@"

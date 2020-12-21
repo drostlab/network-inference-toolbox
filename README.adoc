@@ -1,0 +1,72 @@
+= Network Inference Toolbox
+
+This defines Singularity containers to run a bunch of tools for Gene Regulatory Network inference.
+
+
+== Dependencies
+
+Building the containers requires superuser privileges and https://sylabs.io/[Singularity] installed. This was tested with v3.7, but other v3 versions should work too. GNU `make` is optional.
+
+For running the containers, Singularity is required as well. (Older versions should work fine but were not tested.)
+
+
+== Overview
+
+Currently the following containers are defined. They are supposed not to write to your bind mounts (like home) implicitly; if they do, that is a bug.
+
+You can build a single container by calling
+
+[source,sh]
+----
+sudo singularity build ⟨container.sif⟩ ⟨container.def⟩
+----
+
+and should put the resulting containers into `bin`. Alternatively, with `make` installed, you can just run
+
+[source,sh]
+----
+sudo make
+----
+
+in the repository root to build all containers.
+
+
+=== `arboreto.sif`
+
+A current Python with the https://arboreto.readthedocs.io/en/latest/[`arboreto`] package installed, which contains both a Python implementation of https://github.com/vahuynh/GENIE3[GENIE3] and its "`GRNBOOST2`" reimplementation.
+
+The `run_arboretum.py` [sic] script from the `arboreto` repository is installed as a start script. It has its own help mechanism (through `argparse`); call it with `--help`, e.g. like:
+
+[source,sh]
+----
+bin/arboreto.sif --help
+----
+
+
+=== `PIDC.sif`
+
+An older Julia (v1.0.5) with the https://github.com/Tchanders/NetworkInference.jl[`NetworkInference`] package installed and precompiled. All cache directories are frozen in the image to prevent it from polluting your bind mounts. This means however that new Julia code cannot be automatically compiled. If you need anything beyond running `NetworkInference`, you have the following options:
+
+* Ensure the code is precompiled by calling it in `blueprints/PIDC/environment/precompile` and then rebuilding the container.
+* Set the `JULIA_DEPOT_PATH` environment variable to a writable location when running the container.
+* Run the container in sandbox mode.
+
+The container start script just redirects to the `julia` executable, so you can either just run `bin/PIDC.sif` to drop into a Julia shell or pass it a script to run. Call it with `--help` to learn more:
+
+[source,sh]
+----
+bin/PIDC.sif --help
+----
+
+
+=== `R-multitool.sif`
+
+This container contains a current R installation with a bunch of network inference packages preinstalled. This includes both standard R packages and code that is not prepackaged. The available tools are:
+
+* https://github.com/cheeyeelim/BTR[BTR], which was removed from CRAN and is therefore installed manually, available via `library(BTR)`.
+* https://github.com/aertslab/GENIE3[GENIE3] from Bioconductor, an R implemention of GENIE3 with a C kernel, available via `library(GENIE3)`.
+* https://github.com/vahuynh/GENIE3[GENIE3-R], an R implementation of GENIE3, available at `/opt/GENIE3_R` inside the container. Source `/opt/GENIE3_R/GENIE3.R` to use it.
+* https://cran.r-project.org/web/packages/LEAP/index.html[LEAP] from CRAN, available via `library(LEAP)`.
+* https://cran.r-project.org/web/packages/ppcor/index.html[ppcor] from CRAN, available via `library(ppcor)`.
+* https://github.com/hmatsu1226/SCODE[SCODE-R], the R version of the SCODE package, available at `/opt/SCODE` inside the container. Source `/opt/SCODE/SCODE.R` to use it.
+* https://github.com/CABSEL/SINCERITIES[SINCERITIES-R], the R version of the SINCERITIES package, available at `/opt/SINCERITIES`. This is untested at the moment because I did not find good documentation. Source `/opt/SINCERITIES/MAIN.R` to use it.

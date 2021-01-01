@@ -2,7 +2,10 @@ all: tools
 
 BASE = $(shell pwd)
 
-tools: bin/arboreto.sif bin/PIDC.sif bin/R-multitool.sif
+tools: bin/utilities.sif
+tools: bin/arboreto.sif
+tools: bin/PIDC.sif
+tools: bin/R-multitool.sif
 
 clean:
 	rm bin/*.sif

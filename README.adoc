@@ -28,7 +28,7 @@ and should put the resulting containers into `bin`. Alternatively, with `make` i
 sudo make
 ----
 
-in the repository root to build all containers.
+in the repository root to build all containers. In addition to building the containers, the `Makefile` will checksum their definitions and list them into `.tag` files next to the built containers. This can be useful to detect changes to the containers downstream because the blobs are unfortunately not unique given their dependencies.
 
 
 === `arboreto.sif`

@@ -1,6 +1,23 @@
 BootStrap: library
 From: ubuntu:sha256.cb37e547a14249943c5a3ee5786502f8db41384deb83fa6d2b62f3c587b82b17
 
+%setup
+  # Record all source files that define this container so downstream users can
+  # detect when the container is expectecd to change behavior.
+  find . -type f -exec sha256sum "{}" + >"${SINGULARITY_ROOTFS}/SPECIFICATION"
+
+%apprun specification
+  cat /SPECIFICATION
+
+%apphelp specification
+  Writes this container's specification to standard output.
+
+  The specification is supposed to change if and only if the container
+  definition changes. Other than that, its content is unstructured. This can
+  be used as an indication to check if the container's behavior could have
+  changed, but keep in mind that the behavior could also change if not all
+  relevant dependencies are pinned correctly in the container definition.
+
 %files
   install-R-packages.sh /opt/install-R-packages.sh
   renv.source /opt/renv.source

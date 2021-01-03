@@ -19,7 +19,7 @@ From: ubuntu:sha256.cb37e547a14249943c5a3ee5786502f8db41384deb83fa6d2b62f3c587b8
   relevant dependencies are pinned correctly in the container definition.
 
 %files
-  environment /opt/pidc
+  environment /opt/project
 
 %post
   apt update
@@ -33,15 +33,15 @@ From: ubuntu:sha256.cb37e547a14249943c5a3ee5786502f8db41384deb83fa6d2b62f3c587b8
 
   JULIA_DEPOT_PATH=/opt/julia/depot \
     /opt/julia/bin/julia \
-      --project=/opt/pidc \
+      --project=/opt/project \
       --print 'using Pkg; Pkg.instantiate()' \
-      --load /opt/pidc/precompile.jl
+      --load /opt/project/precompile.jl
 
   chmod --recursive a+r /opt/julia/depot
 
 %environment
   export JULIA_DEPOT_PATH="/opt/julia/depot"
-  export JULIA_PROJECT=/opt/pidc
+  export JULIA_PROJECT=/opt/project
   export PATH="/opt/julia/bin:$PATH"
 
 %runscript

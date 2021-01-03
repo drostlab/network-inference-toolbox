@@ -28,7 +28,9 @@ and should put the resulting containers into `bin`. Alternatively, with `make` i
 sudo make
 ----
 
-in the repository root to build all containers. In addition to building the containers, the `Makefile` will checksum their definitions and list them into `.tag` files next to the built containers. This can be useful to detect changes to the containers downstream because the blobs are unfortunately not unique given their dependencies.
+in the repository root to build all containers.
+
+The containers also each contain a singularity app `specification` that writes a digest of the container definition to standard output. This can be useful to detect changes to the containers downstream because the blobs are unfortunately not unique given their dependencies.
 
 
 === `arboreto.sif`
@@ -43,19 +45,19 @@ bin/arboreto.sif --help
 ----
 
 
-=== `PIDC.sif`
+=== `NetworkInference.jl.sif`
 
 An older Julia (v1.0.5) with the https://github.com/Tchanders/NetworkInference.jl[`NetworkInference`] package installed and precompiled. All cache directories are frozen in the image to prevent it from polluting your bind mounts. This means however that new Julia code cannot be automatically compiled. If you need anything beyond running `NetworkInference`, you have the following options:
 
-* Ensure the code is precompiled by calling it in `blueprints/PIDC/environment/precompile` and then rebuilding the container.
+* Ensure the code is precompiled by calling it in `blueprints/NetworkInference.jl/environment/precompile` and then rebuilding the container.
 * Set the `JULIA_DEPOT_PATH` environment variable to a writable location when running the container.
 * Run the container in sandbox mode.
 
-The container start script just redirects to the `julia` executable, so you can either just run `bin/PIDC.sif` to drop into a Julia shell or pass it a script to run. Call it with `--help` to learn more:
+The container start script just redirects to the `julia` executable, so you can either just run `bin/NetworkInference.jl.sif` to drop into a Julia shell or pass it a script to run. Call it with `--help` to learn more:
 
 [source,sh]
 ----
-bin/PIDC.sif --help
+bin/NetworkInference.sif --help
 ----
 
 

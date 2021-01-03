@@ -4,7 +4,7 @@ BASE = $(shell pwd)
 
 tools: bin/utilities.sif
 tools: bin/arboreto.sif
-tools: bin/PIDC.sif
+tools: bin/NetworkInference.jl.sif
 tools: bin/R-multitool.sif
 
 clean:

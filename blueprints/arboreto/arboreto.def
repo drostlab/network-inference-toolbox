@@ -20,6 +20,7 @@ From: ubuntu:sha256.cb37e547a14249943c5a3ee5786502f8db41384deb83fa6d2b62f3c587b8
 
 %files
   arboreto.yml /opt/arboreto.yml
+  dask.yml /opt/dask.yml
 
 %post
   apt-get update
@@ -60,5 +61,9 @@ From: ubuntu:sha256.cb37e547a14249943c5a3ee5786502f8db41384deb83fa6d2b62f3c587b8
   wget "https://raw.githubusercontent.com/tmoerman/arboreto/0.1.5/scripts/run_arboretum.py"
   echo "83f77b8782403e597edb5677d20a775ba012532e742d04eb7401e3571d438d18  run_arboretum.py" | sha256sum -c
 
+%environment
+  export PATH="/opt/conda/envs/arboreto/bin:$PATH"
+  export DASK_CONFIG="/opt/dask.yml"
+
 %runscript
-  /opt/conda/envs/arboreto/bin/python /opt/run_arboretum.py "$@"
+  python /opt/run_arboretum.py "$@"

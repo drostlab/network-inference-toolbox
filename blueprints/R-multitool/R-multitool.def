@@ -28,7 +28,14 @@ From: ubuntu:sha256.cb37e547a14249943c5a3ee5786502f8db41384deb83fa6d2b62f3c587b8
 %post
   echo "deb http://us.archive.ubuntu.com/ubuntu focal universe" >> /etc/apt/sources.list
   apt-get update
-  apt install -y wget time git r-base=3.6.3-2
+  apt install -y \
+    git \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    libxml2-dev \
+    r-base=3.6.3-2 \
+    time \
+    wget
 
   # We will construct the environment in `/opt`. Ultimately, it will contain
   # an `renv` environment containing all R dependencies and all tools that can

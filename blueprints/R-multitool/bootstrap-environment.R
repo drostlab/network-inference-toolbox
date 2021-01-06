@@ -8,7 +8,7 @@ renv::install(c(
   "doParallel",
   "doRNG",
   "diptest",
-  "drostlab/edgynode@ed3596f22486f8b33d7ac09751ecda6741626dcc",
+  "drostlab/edgynode@8337b3b53bd772511af0deed642f9ff888f16bb8",
   "entropy",
   "foreach",
   "glmnet",

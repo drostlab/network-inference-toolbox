@@ -30,7 +30,9 @@ From: ubuntu:sha256.cb37e547a14249943c5a3ee5786502f8db41384deb83fa6d2b62f3c587b8
   apt-get update
   apt install -y \
     git \
+    libcairo2-dev \
     libcurl4-openssl-dev \
+    libfontconfig1-dev \
     libssl-dev \
     libxml2-dev \
     r-base=3.6.3-2 \

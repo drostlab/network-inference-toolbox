@@ -21,6 +21,7 @@ renv::install(c(
   "pracma",
   "randomForest",
   "Rcpp",
+  "svglite",
   "XML@3.99-0.3"
 ))
 

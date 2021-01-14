@@ -257,9 +257,9 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "drostlab",
       "RemoteRepo": "edgynode",
-      "RemoteRef": "5629a94cf13c99566beead274ec132cfb5eaa379",
-      "RemoteSha": "5629a94cf13c99566beead274ec132cfb5eaa379",
-      "Hash": "87ce30f1433f646fa039f142b3328520"
+      "RemoteRef": "3c1516318f6259c6ea623c4c15efc44afa68954e",
+      "RemoteSha": "3c1516318f6259c6ea623c4c15efc44afa68954e",
+      "Hash": "187823b454983cea37197be1ad8ad664"
     },
     "ellipsis": {
       "Package": "ellipsis",

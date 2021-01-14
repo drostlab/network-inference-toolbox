@@ -14,10 +14,10 @@
   "Packages": {
     "BH": {
       "Package": "BH",
-      "Version": "1.72.0-3",
+      "Version": "1.75.0-0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "8f9ce74c6417d61f0782cbae5fd2b7b0"
+      "Hash": "e4c04affc2cac20c8fec18385cd14691"
     },
     "BiocManager": {
       "Package": "BiocManager",
@@ -174,10 +174,10 @@
     },
     "cpp11": {
       "Package": "cpp11",
-      "Version": "0.2.4",
+      "Version": "0.2.5",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "ba66e5a750d39067d888aa7af797fed2"
+      "Hash": "8b9a10255e862eb99e38fa8b0caa6c0d"
     },
     "crayon": {
       "Package": "crayon",
@@ -202,10 +202,10 @@
     },
     "diffobj": {
       "Package": "diffobj",
-      "Version": "0.3.2",
+      "Version": "0.3.3",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "16533929cf545f3c9b796780cccf5eff"
+      "Hash": "55fae7ec1418d2a47bd552571673d1af"
     },
     "digest": {
       "Package": "digest",
@@ -242,6 +242,13 @@
       "Repository": "CRAN",
       "Hash": "d0509913b27ea898189ee664b6030dc2"
     },
+    "e1071": {
+      "Package": "e1071",
+      "Version": "1.7-4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "7e9462e3e3e565f51fbec181dfcab890"
+    },
     "edgynode": {
       "Package": "edgynode",
       "Version": "0.1.0",
@@ -250,9 +257,9 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "drostlab",
       "RemoteRepo": "edgynode",
-      "RemoteRef": "8337b3b53bd772511af0deed642f9ff888f16bb8",
-      "RemoteSha": "8337b3b53bd772511af0deed642f9ff888f16bb8",
-      "Hash": "cc1e10bea067425f09be684244807d1b"
+      "RemoteRef": "5629a94cf13c99566beead274ec132cfb5eaa379",
+      "RemoteSha": "5629a94cf13c99566beead274ec132cfb5eaa379",
+      "Hash": "87ce30f1433f646fa039f142b3328520"
     },
     "ellipsis": {
       "Package": "ellipsis",
@@ -331,12 +338,19 @@
       "Repository": "CRAN",
       "Hash": "3eb6477d01eb5bbdc03f7d5f70f2733e"
     },
-    "glmnet": {
-      "Package": "glmnet",
-      "Version": "4.0-2",
+    "ggsci": {
+      "Package": "ggsci",
+      "Version": "2.9",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "056100917c75e6f8a0d36f8bdd552799"
+      "Hash": "81ccb8213ed592598210afd10c3a5936"
+    },
+    "glmnet": {
+      "Package": "glmnet",
+      "Version": "4.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "d5d038d2f66d7ed2f95045c62d42e7b4"
     },
     "glue": {
       "Package": "glue",
@@ -354,10 +368,10 @@
     },
     "hms": {
       "Package": "hms",
-      "Version": "0.5.3",
+      "Version": "1.0.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "726671f634529d470545f9fd1a9d1869"
+      "Hash": "bf552cdd96f5969873afdac7311c7d0d"
     },
     "igraph": {
       "Package": "igraph",

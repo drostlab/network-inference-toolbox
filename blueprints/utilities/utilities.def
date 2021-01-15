@@ -7,10 +7,19 @@ From: alpine:sha256.03883ca565b32e58fa0a496316d69de35741f2ef34b5b4658a6fec04ed81
   find . -type f -exec sha256sum "{}" + >"${SINGULARITY_ROOTFS}/SPECIFICATION"
 
 %apprun specification
+  set -e
+  if [ -n "$1" ]; then
+    echo "$1  /SPECIFICATION" | sha256sum -cs
+  fi
   cat /SPECIFICATION
 
 %apphelp specification
   Writes this container's specification to standard output.
+
+  Optionally, if a SHA-256 checksum is given as the first command line
+  argument, it will be checked against the full specification's checksum,
+  exiting with a nonzero status if they deviate. In that case, the
+  specification is not written.
 
   The specification is supposed to change if and only if the container
   definition changes. Other than that, its content is unstructured. This can

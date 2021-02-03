@@ -27,6 +27,20 @@ From: alpine:sha256.03883ca565b32e58fa0a496316d69de35741f2ef34b5b4658a6fec04ed81
   changed, but keep in mind that the behavior could also change if not all
   relevant dependencies are pinned correctly in the container definition.
 
+%apprun manifest
+  {
+    set -ex
+    cat /SPECIFICATION
+    apk list
+    xsv --version
+  } 2>&1
+
+%apphelp manifest
+  Summarizes this container's contents to standard output.
+
+  This is meant for documentation purposes to make the results of running the
+  tools in this container reproducible.
+
 %post
   wget -O xsv.tar.gz https://github.com/BurntSushi/xsv/releases/download/0.13.0/xsv-0.13.0-x86_64-unknown-linux-musl.tar.gz
   echo "d36b1be0f008d6597c2437e764fbe720eb7557f8980e0b03ca709e1020b5c52b  xsv.tar.gz" | sha256sum -c

@@ -27,6 +27,21 @@ From: ubuntu:sha256.cb37e547a14249943c5a3ee5786502f8db41384deb83fa6d2b62f3c587b8
   changed, but keep in mind that the behavior could also change if not all
   relevant dependencies are pinned correctly in the container definition.
 
+%apprun manifest
+  {
+    set -ex
+    cat /SPECIFICATION
+    apt list --installed
+    julia --version
+    cat /opt/project/Manifest.toml
+  } 2>&1
+
+%apphelp manifest
+  Summarizes this container's contents to standard output.
+
+  This is meant for documentation purposes to make the results of running the
+  tools in this container reproducible.
+
 %files
   environment /opt/project
 

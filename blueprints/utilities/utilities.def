@@ -9,7 +9,10 @@ From: alpine:sha256.03883ca565b32e58fa0a496316d69de35741f2ef34b5b4658a6fec04ed81
 %apprun specification
   set -e
   if [ -n "$1" ]; then
-    echo "$1  /SPECIFICATION" | sha256sum -cs
+    echo "$1  /SPECIFICATION" | sha256sum -cs || ( \
+      >&2 echo "ERROR: Specification checksum mismatch. Check toolbox version." \
+      && exit 1 \
+    )
   fi
   cat /SPECIFICATION
 

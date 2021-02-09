@@ -9,7 +9,10 @@ From: ubuntu:sha256.cb37e547a14249943c5a3ee5786502f8db41384deb83fa6d2b62f3c587b8
 %apprun specification
   set -e
   if [ -n "$1" ]; then
-    echo "$1  /SPECIFICATION" | sha256sum -c --status
+    echo "$1  /SPECIFICATION" | sha256sum -c --status || ( \
+      >&2 echo "ERROR: Specification checksum mismatch. Check toolbox version." \
+      && exit 1 \
+    )
   fi
   cat /SPECIFICATION
 

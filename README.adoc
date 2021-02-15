@@ -9,6 +9,8 @@ Building the containers requires superuser privileges and https://sylabs.io/[Sin
 
 For running the containers, Singularity is required as well. (Older versions should work fine but were not tested.)
 
+NOTE: Building and running the containers on Windows Subsystem for Linux is currently not supported (and does not work).
+
 
 == Overview
 

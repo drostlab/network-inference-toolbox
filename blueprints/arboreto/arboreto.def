@@ -11,6 +11,7 @@ From: ubuntu:sha256.cb37e547a14249943c5a3ee5786502f8db41384deb83fa6d2b62f3c587b8
   if [ -n "$1" ]; then
     echo "$1  /SPECIFICATION" | sha256sum -c --status || ( \
       >&2 echo "ERROR: Specification checksum mismatch. Check toolbox version." \
+      && >&2 echo "NOTE: Checksum is pinned to '$1', but found to be '$(sha256sum /SPECIFICATION | cut -d' ' -f1)'." \
       && exit 1 \
     )
   fi

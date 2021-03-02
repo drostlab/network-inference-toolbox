@@ -4,6 +4,7 @@ renv::init(bare = TRUE)
 
 renv::install(c(
   "bioc::GENIE3",
+  "bioc::WGCNA",
   "cvTools",
   "doParallel",
   "doRNG",

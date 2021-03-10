@@ -4,6 +4,7 @@ renv::init(bare = TRUE)
 
 renv::install(c(
   "bioc::GENIE3",
+  "bioc::noisyr",
   "bioc::WGCNA",
   "cvTools",
   "doParallel",
